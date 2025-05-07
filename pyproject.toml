@@ -1,0 +1,17 @@
+[project]
+name = "peh-validation-library"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Caio Mescouto Terra de Souza", email = "caio.mescouto@vito.be" }
+]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+peh-validation-library = "peh_validation_library:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
