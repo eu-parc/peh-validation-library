@@ -7,7 +7,11 @@ authors = [
     { name = "Caio Mescouto Terra de Souza", email = "caio.mescouto@vito.be" }
 ]
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "fastexcel>=0.14.0",
+    "pandera[polars]>=0.23.1",
+    "polars>=1.29.0",
+]
 
 [project.scripts]
 peh-validation-library = "peh_validation_library:main"
@@ -15,3 +19,34 @@ peh-validation-library = "peh_validation_library:main"
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.131.14",
+    "ipykernel>=6.29.5",
+    "pytest>=8.3.5",
+    "pytest-cov>=6.1.1",
+    "ruff>=0.11.8",
+]
+
+[tool.ruff]
+line-length = 79
+src = ["src/peh_validation_library"]
+extend-exclude = ["tests", "scripts", "notebooks", "data"]
+
+[tool.ruff.lint]
+preview = true
+select = ["F", "E", "W", "PL", "PT", "I001"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["peh_validation_library"]
+force-sort-within-sections = true
+
+[tool.ruff.format]
+preview = true
+quote-style = "single"
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = ["-p no:warnings"]
+testpaths = ["tests/"]

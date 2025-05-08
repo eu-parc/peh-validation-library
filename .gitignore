@@ -8,4 +8,18 @@ wheels/
 
 # Virtual environments
 .venv
+
+# cache
+.ruff_cache/
+.pytest_cache/
+.hypothesis/
+
 .python-version
+
+# notebooks
+notebooks/__init__.py
+notebooks/cb24_lab_test.py
+notebooks/cb24_quest_test.py
+notebooks/template_cb_24_lab.ipynb
+notebooks/template_cb_24_quest.ipynb
+notebooks/val_design_yaml_to_py.ipynb
