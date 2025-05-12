@@ -77,6 +77,8 @@ class Validator:
                     error_source=__name__,
                 )
             )
+        finally:
+            return self.__error_collector.get_errors()
 
     @classmethod
     def build_validator(
@@ -103,7 +105,8 @@ class Validator:
                     error_source=__name__,
                 )
             )
-            return
+            return ErrorCollector().get_errors()
+
         logger.info('Validator build complete')
 
         return cls(dataframe=df, config=df_schema, logger=logger)

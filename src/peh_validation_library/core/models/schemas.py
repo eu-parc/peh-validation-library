@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from functools import partial
-import importlib
 from typing import Any, Callable
 
 import pandera.polars as pa
@@ -24,8 +23,6 @@ from peh_validation_library.core.utils.mappers import (
     expression_mapper,
     validation_type_mapper,
 )
-
-FUNC_MODULE = 'peh_validation_library.config.check_module'
 
 
 class CheckSchema(BaseModel):
@@ -74,12 +71,17 @@ class CheckSchema(BaseModel):
                 error_msg=error_msg,
             )
 
-        module = importlib.import_module(
-            f'{FUNC_MODULE}.{check_command.command}'
+        fn = check_command.command
+        partial_fn = partial(
+            fn,
+            arg_values=check_command.arg_values,
+            arg_columns=check_command.arg_columns,
+            subject=check_command.subject,
         )
+
         return cls(
             name=name,
-            fn=module.check_fn,
+            fn=partial_fn,
             args_=args_,
             error_level=error_level,
             error_msg=error_msg,
@@ -93,7 +95,6 @@ class CheckSchema(BaseModel):
             error=self.error_msg,
             description=self.error_level.value,
             statistics={'args_': self.args_},
-            args_=self.args_,
         )
 
 

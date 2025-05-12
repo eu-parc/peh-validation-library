@@ -1,7 +1,9 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Callable
 
+import pandera.polars as pa
+import polars as pl
 from pydantic import BaseModel, Field
 
 from peh_validation_library.core.utils.enums import CheckCases
@@ -11,13 +13,16 @@ from peh_validation_library.core.utils.mappers import (
 
 
 class SimpleCheckExpression(BaseModel):
-    command: str
+    command: str | Callable[[pa.PolarsData, Any], pl.LazyFrame]
     subject: list[str] | None = None
     arg_values: list[Any] | None = None
     arg_columns: list[str] | None = None
 
     def get_check_name(self) -> str:
-        return self.command.replace('_', ' ').title()
+        try:
+            return self.command.replace('_', ' ').title()
+        except AttributeError:
+            return self.command.__name__.replace('_', ' ').title()
 
     def get_message(self) -> str:
         msg = f'The column {self.get_check_name()}'

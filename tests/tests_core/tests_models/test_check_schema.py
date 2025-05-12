@@ -49,16 +49,14 @@ def test_get_schema_simple_check(check_command, subject, arg_values, arg_columns
     assert hasattr(check_schema.fn, '__call__')
     assert isinstance(check_schema.build(), pa.Check)
 
-def test_get_schema_simple_check_module(monkeypatch):
+def test_get_schema_simple_check_module():
+
+    def fake_check_fn(*args, **kwargs):
+        pass
+
     check_command = SimpleCheckExpression(
-        command='something',
+        command=fake_check_fn,
     )
-
-    class FakeModule:
-        def check_fn(self, *args, **kwargs):
-            pass
-
-    monkeypatch.setattr(importlib, 'import_module', lambda x: FakeModule)
 
     expected_name = check_command.get_check_name()
     expected_args = check_command.get_args()
