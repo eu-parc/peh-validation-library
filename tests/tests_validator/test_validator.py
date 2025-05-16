@@ -119,4 +119,4 @@ def test_build_validator_error_handling(error_collector):
     assert len(error_collector.get_errors()) == 1
     error = error_collector.get_errors()[0]
     assert isinstance(error, ExceptionSchema)
-    assert error.error_level == 'critical'
+    assert error.error_level.name == 'CRITICAL'

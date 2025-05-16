@@ -1,13 +1,13 @@
-from enum import StrEnum
+from enum import Enum
 
 
-class ErrorLevel(StrEnum):
+class ErrorLevel(Enum):
     WARNING = 'warning'
     ERROR = 'error'
     CRITICAL = 'critical'
 
 
-class ValidationType(StrEnum):
+class ValidationType(Enum):
     DATE = 'date'
     DATETIME = 'datetime'
     BOOL = 'boolean'
@@ -17,7 +17,7 @@ class ValidationType(StrEnum):
     CAT = 'categorical'
 
 
-class CheckCases(StrEnum):
+class CheckCases(Enum):
     CONDITION = 'condition'
     CONJUNCTION = 'conjunction'
     DISJUNCTION = 'disjunction'
