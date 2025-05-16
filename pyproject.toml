@@ -8,13 +8,9 @@ authors = [
 ]
 requires-python = ">=3.10"
 dependencies = [
-    "fastexcel>=0.14.0",
     "pandera[polars]>=0.23.1",
     "polars>=1.29.0",
 ]
-
-[project.scripts]
-peh-validation-library = "peh_validation_library:main"
 
 [build-system]
 requires = ["hatchling"]
