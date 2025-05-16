@@ -57,7 +57,7 @@ class CaseCheckExpression(BaseModel):
 
     def get_check_name(self) -> str:
         return (
-            f'{str(self.check_case).title()} of '
+            f'{str(self.check_case.name).title()} of '
             f'{", ".join([e.get_check_name() for e in self.expressions])}'
         )
 
